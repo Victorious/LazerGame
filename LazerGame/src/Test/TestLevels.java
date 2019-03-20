@@ -7,8 +7,8 @@ import org.junit.Test;
 public class TestLevels {
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testLevel1Graphic() {
+		
 	}
 
 }
