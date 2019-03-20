@@ -2,10 +2,13 @@ package Main;
 
 import java.awt.Canvas;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.text.StyledEditorKit.ForegroundAction;
+import javax.swing.Timer;
 
 public class Levels extends Canvas {
+	
 	
 	/* 
 	0 = spelyta
@@ -15,22 +18,22 @@ public class Levels extends Canvas {
 	4 = dörr
 	5 = laser
 	*/
-	
+	int x,y;
 	public void paint(Graphics g) {
-		level1(g);
+		Player p = new Player(x,y);
+		p.paintComponent(g);
 	}
 	
 	
 	
 	public void level1(Graphics g) {
-		Player p = new Player(10,10);
-		p.paint(g);
+
 		int[][] level1 = {
 				{1,1,1,1,1,1,1,1,1,1},
 				{1,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,1},
+				{1,0,2,0,3,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,1},
 				{1,1,1,1,1,1,1,1,1,1}
 			};
@@ -41,7 +44,7 @@ public class Levels extends Canvas {
 			}
 			System.out.println();
 		}
-
 	}
+
 	
 }
