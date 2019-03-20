@@ -9,8 +9,8 @@ import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 
 public class Game implements Runnable{
-	static int height = 725;
-	static int width = 725;
+	static int height = 710;
+	static int width = 730;
 	Levels lvl = new Levels();
 	JFrame frame = new JFrame();
 	
