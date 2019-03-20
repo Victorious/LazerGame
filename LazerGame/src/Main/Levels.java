@@ -18,7 +18,7 @@ public class Levels extends JPanel implements KeyListener{
 	0 = spelyta
 	1 = vägg
 	2 = karaktär
-	3= skatt
+	3 = skatt
 	4 = dörr
 	5 = laser
 	*/
@@ -142,10 +142,18 @@ public class Levels extends JPanel implements KeyListener{
 						playerX = j*25;
 						playerY = i*25;	
 					}
-					
 					player = new Player(playerX, playerY,25,25);
 					player.paintComponent(g);
 					w.wallPositionList.add(2);
+				}
+				if (level1[i][j] == 3) {
+					// Code of treasures
+				}
+				if (level1[i][j] == 4) {
+					// Code of Dorr
+				}
+				if (level1[i][j] == 5) {
+					// Code of Lazer
 				}
 			}
 		}
