@@ -5,9 +5,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 public class Wall extends GameItem {
-	
-	ArrayList<Integer> wallPositionList = new ArrayList<Integer>();
-	
+		
 	int x;
 	int y;
 	int width;

@@ -90,7 +90,6 @@ public class Levels extends JPanel implements KeyListener{
 
 //	Method for checking collisions
 	public void collision() {
-		System.out.println(w.wallPositionList);
 	}
 	
 //	Initilizing level 1
@@ -144,7 +143,6 @@ public class Levels extends JPanel implements KeyListener{
 					}
 					player = new Player(playerX, playerY,25,25);
 					player.paintComponent(g);
-					w.wallPositionList.add(2);
 				}
 				if (level1[i][j] == 3) {
 					// Code of treasures
