@@ -14,8 +14,4 @@ public abstract class GameItem {
 		this.height = height;
 	}
 	
-	public abstract void render(Graphics g);
-	
-	public abstract void update();
-	
 }

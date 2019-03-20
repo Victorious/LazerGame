@@ -7,7 +7,8 @@ import java.awt.Graphics;
 import javax.swing.JFrame;
 
 public class Window extends Canvas{
-
+//	This class is not in use for the moment.
+//	Window is beeing implemented directly in game class
 	int height, width;
 	
 	JFrame frame;
