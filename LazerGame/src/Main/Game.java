@@ -9,10 +9,15 @@ import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 
 public class Game implements Runnable{
+
 	static int height = 710;
 	static int width = 730;
+
+	int x,y;
+
 	Levels lvl = new Levels();
 	JFrame frame = new JFrame();
+	Player player = new Player(x, y);
 	
 	Graphics g;
 	public static void main(String[] args) {
@@ -27,7 +32,7 @@ public class Game implements Runnable{
 
 	// Run method
 	public void run() {
-		render();		
+		render();
 	}
 	
 	// All Graphics goes here
@@ -44,7 +49,7 @@ public class Game implements Runnable{
 		frame.setFocusable(true);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
-		
-		
+		frame.pack();
+		frame.addKeyListener(lvl);
 	}
 }

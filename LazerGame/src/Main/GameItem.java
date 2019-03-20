@@ -4,15 +4,18 @@ import java.awt.Graphics;
 
 public abstract class GameItem {
 
-	public GameItem(int x, int y) {
-		
+	int x,y;
+	int width, height;
+	
+	public GameItem(int x, int y, int width, int height) {
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
 	}
 	
 	public abstract void render(Graphics g);
 	
 	public abstract void update();
-
-
-	
 	
 }

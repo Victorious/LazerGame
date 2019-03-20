@@ -1,20 +1,16 @@
 package Test;
 
-import static org.junit.Assert.*;
-
-import java.awt.event.KeyEvent;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
 import Main.Player;
 
 public class TestPlayer {
-int x,y;
+	int x = 20 ,y = 20;
 	@Test
 	public void testPlayerMoveUp() {
 		Player p = new Player(x, y);
-		
-//		KeyEvent actual = p.keyPressed();
 	}
 	
 	@Test
