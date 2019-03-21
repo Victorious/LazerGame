@@ -27,7 +27,7 @@ public class Player extends JPanel implements KeyListener{
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.fillRect(x, y, 30, 30);
+		g.fillRect(x, y, 25, 25);
 	}
 
 	public void moveUp() {
