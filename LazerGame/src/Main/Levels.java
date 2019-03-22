@@ -26,6 +26,7 @@ public class Levels extends JPanel implements KeyListener{
 
 	int x=25,y=25;
 
+	
 	// Variables
 
 	int playerX, playerY;
@@ -122,19 +123,19 @@ public class Levels extends JPanel implements KeyListener{
 		else {
 		y -= 5;
 		repaint();
-		System.out.println("y="+y);
+		//System.out.println("y="+y);
 
 		}
 	}
 
 	public void moveDown() {
-		if(x>660 || y==300 && x<275 ) {
+		if(y==625 || y==300 && x<275 ) {
 			
 		}
 		else {
 		y += 5;
 		repaint();
-		System.out.println("y="+y);
+		//System.out.println("y="+y);
 		}
 	}
 	public void moveLeft() {
@@ -144,17 +145,17 @@ public class Levels extends JPanel implements KeyListener{
 		else {
 		x -= 5;
 		repaint();
-		System.out.println("x="+x);
+		//System.out.println("x="+x);
 		}
 	}
 	public void moveRight() {
-		if(y==625 || (x==225 && y>300 && y<475)) {
+		if(x==675 || (x==225 && y>300 && y<475)) {
 			
 		}
 		else {
 		x += 5;
 		repaint();
-		System.out.println("x="+x);
+		//System.out.println("x="+x);
 		}
 	}
 	
