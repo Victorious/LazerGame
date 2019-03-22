@@ -26,8 +26,6 @@ public class Levels extends JPanel implements KeyListener{
 
 	int x=25,y=25;
 
-	
-	
 	// Variables
 
 	int playerX, playerY;
