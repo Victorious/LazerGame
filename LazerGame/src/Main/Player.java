@@ -1,5 +1,6 @@
 package Main;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,19 +14,22 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
 
-public class Player extends JPanel implements KeyListener{
+public class Player extends GameItem{
 
 	Graphics g;
 	int x,y;
+	int width, height;
 	
-	int velX, velY;
-	
-	public Player(int x, int y) {
+	public Player(int x, int y, int width, int height) {
+		super(x,y,width,height);
 		this.x = x;
 		this.y = y;
+		this.width = width;
+		this.height = height;
+		
 	}
 	
-	public void paintComponent(Graphics g) {
+	/*public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.fillRect(x, y, 25, 25);
 	}
@@ -47,12 +51,10 @@ public class Player extends JPanel implements KeyListener{
 		repaint();
 	}
 	
-	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub		
 	}
 	
-	@Override
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		if (key == KeyEvent.VK_UP) {
@@ -67,10 +69,12 @@ public class Player extends JPanel implements KeyListener{
 		if (key == KeyEvent.VK_RIGHT) {
 			moveRight();
 		}	
-	}
+	}*/
 
-	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
+
+		g.setColor(Color.RED);
+		g.fillRect(x, y, width, height);
 	}
 }

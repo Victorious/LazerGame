@@ -13,9 +13,10 @@ public abstract class GameItem {
 		this.width = width;
 		this.height = height;
 	}
-	
-	public abstract void render(Graphics g);
-	
-	public abstract void update();
+
+	public void paintComponent(Graphics g) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

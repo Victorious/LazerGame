@@ -17,7 +17,6 @@ public class Game implements Runnable{
 
 	Levels lvl = new Levels();
 	JFrame frame = new JFrame();
-	Player player = new Player(x, y);
 	
 	Graphics g;
 	public static void main(String[] args) {
@@ -40,6 +39,8 @@ public class Game implements Runnable{
 		frame.add(lvl);
 	}
 	
+	
+//	Creating window GUI
 	public void createWindow() {
 		frame.setPreferredSize(new Dimension(width, height));
 		frame.setMaximumSize(new Dimension(width, height));

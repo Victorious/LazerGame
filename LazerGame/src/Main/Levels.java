@@ -6,10 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class Levels extends Canvas implements KeyListener{
+public class Levels extends JPanel implements KeyListener{
 	
 	
 	
@@ -17,20 +19,35 @@ public class Levels extends Canvas implements KeyListener{
 	0 = spelyta
 	1 = vägg
 	2 = karaktär
-	3= skatt
+	3 = skatt
 	4 = dörr
 	5 = laser
 	*/
+
 	int x=25,y=25;
+
+	
+	
+	// Variables
+
+	int playerX, playerY;
+	int width = 25, height = 25;
+	
+	//Creating player and walls
+	Player player = new Player(playerX, playerY ,25,25);
+	Wall w = new Wall(x, y, width, height);
+	
+	//method for painting to canvas
+
 	public void paint(Graphics g) {
-		Player p = new Player(x,y);
-		p.paintComponent(g);
+		super.paintComponent(g);
+		player = new Player(playerX, playerY, 25, 25);
 		level1(g);
 	}
 	
 	
+
 	public void level1(Graphics g) {
-		
 
 		int[][] level1 = {
 
@@ -38,7 +55,7 @@ public class Levels extends Canvas implements KeyListener{
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -64,16 +81,36 @@ public class Levels extends Canvas implements KeyListener{
 
 			};
 		
+//		Loop for checking each pixel in the canvas and printing depended on which number each pixel precent
 		for (int i = 0; i < level1.length; i++) {
 			for (int j = 0; j < level1[i].length; j++) {
+
 				//System.out.print(level1[i][j]);
 				
 				if(level1[i][j]==1) {
-					
-				Wall w = new Wall(j*25, i*25);
+				
+				w = new Wall(j*25, i*25, width, height);
 				w.paint(g);
 				}
+				if (level1[i][j] == 2) {
+					if (playerX == 0 || playerY == 0) {
+						playerX = j*25;
+						playerY = i*25;	
+					}
+					player = new Player(playerX, playerY,25,25);
+					player.paintComponent(g);
+				}
+				if (level1[i][j] == 3) {
+					// Code of treasures
+				}
+				if (level1[i][j] == 4) {
+					// Code of Dorr
+				}
+				if (level1[i][j] == 5) {
+					// Code of Lazer
+				}
 			}
+
 			//System.out.println();
 		}
 }
@@ -88,8 +125,10 @@ public class Levels extends Canvas implements KeyListener{
 		y -= 5;
 		repaint();
 		System.out.println("y="+y);
+
 		}
 	}
+
 	public void moveDown() {
 		if(x>660 || y==300 && x<275 ) {
 			
@@ -148,6 +187,4 @@ public class Levels extends Canvas implements KeyListener{
 		// TODO Auto-generated method stub
 	}
 
-
-	
 }
