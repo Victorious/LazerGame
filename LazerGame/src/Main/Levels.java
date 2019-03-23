@@ -1,6 +1,10 @@
+package Main;
 
-	
-	
+import java.awt.Graphics;
+
+import javax.swing.JComponent;
+
+public class Levels extends JComponent {		
 	
 	/* 
 	0 = spelyta
@@ -70,10 +74,7 @@
 		
 //		Loop for checking each pixel in the canvas and printing depended on which number each pixel precent
 		for (int i = 0; i < level1.length; i++) {
-			for (int j = 0; j < level1[i].length; j++) {
-
-				//System.out.print(level1[i][j]);
-				
+			for (int j = 0; j < level1[i].length; j++) {			
 				if(level1[i][j]==1) {
 				
 				w = new Wall(j*25, i*25, width, height);
@@ -147,32 +148,4 @@
 		//System.out.println("x="+x);
 		}
 	}
-	
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub		
-	}
-	
-	@Override
-	public void keyPressed(KeyEvent e) {
-		int key = e.getKeyCode();
-		if (key == KeyEvent.VK_UP) {
-			moveUp();
-		}
-		if (key == KeyEvent.VK_DOWN) {
-			moveDown();
-		}
-		if (key == KeyEvent.VK_LEFT) {
-			moveLeft();
-		}
-		if (key == KeyEvent.VK_RIGHT) {
-			moveRight();
-		}	
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-	}
-
 }

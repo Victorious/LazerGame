@@ -7,8 +7,11 @@ import org.junit.Test;
 public class TestGame {
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testCheckingIfGameStarted() {
+	}
+	
+	@Test
+	public void testCheckingIfGameStoped() {
 	}
 
 }

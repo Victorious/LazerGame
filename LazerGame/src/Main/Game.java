@@ -51,6 +51,5 @@ public class Game implements Runnable{
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		frame.pack();
-		frame.addKeyListener(lvl);
 	}
 }
