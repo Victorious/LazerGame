@@ -6,13 +6,11 @@ import java.awt.Graphics;
 
 import javax.swing.JFrame;
 
-public class Window extends Canvas{
+public class Window{
 
 	int height, width;
 	
 	JFrame frame;
-	Canvas canvas;
-	Graphics g;
 	
 	public Window(int height, int width) {
 		this.height = height;
@@ -23,28 +21,18 @@ public class Window extends Canvas{
 	
 	
 	public void createWindow() {
-		Levels lvl = new Levels();
-		frame = new JFrame("Title");
-		frame.setSize(width, height);
-		frame.show();
-		
-		canvas = new Canvas();
-		canvas.setPreferredSize(new Dimension(width, height));
-		canvas.setMaximumSize(new Dimension(width, height));
-		canvas.setMinimumSize(new Dimension(width, height));
-		canvas.setFocusable(false);
-		
-		frame.add(canvas);
+		frame = new JFrame();
+		frame.setPreferredSize(new Dimension(width, height));
+		frame.setMaximumSize(new Dimension(width, height));
+		frame.setMinimumSize(new Dimension(width, height));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+	
 		frame.pack();
 	}
 	
 	public JFrame getJFrame() {
 		return frame;
-	}
-	
-	
-	public Canvas getCanvas() {
-		return canvas;
-	}
-	
+	}	
 }

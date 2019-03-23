@@ -1,76 +1,73 @@
 package Main;
 
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
-import javax.swing.Action;
-import javax.swing.ActionMap;
-import javax.swing.InputMap;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
-import javax.swing.KeyStroke;
-import javax.swing.Timer;
 
-public class Player extends JPanel implements KeyListener{
+public class Player extends JComponent{
 
-	Graphics g;
 	int x,y;
-	
-	int velX, velY;
+	int velX = 10, velY = 10;
 	
 	public Player(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 	
+//	Painting player
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.fillRect(x, y, 25, 25);
 	}
 
+//	Movement functions
 	public void moveUp() {
-		y -= 10;
-		repaint();
+		if(y==25 || y==350 && x<275 || y==475 && x>225 && x<275) {
+		}
+		else {
+		y -= velY;
+		}
 	}
 	public void moveDown() {
-		y += 10;
-		repaint();
+		if(x>660 || y==300 && x<275 ) {
+			
+		}
+		else {
+		y += velY;
+		}
 	}
 	public void moveLeft() {
-		x -= 10;
-		repaint();
+		if(x==25 || (x==275 && y>300 && y<475)) {
+		}
+		else {
+			x -= velX;
+		}
 	}
 	public void moveRight() {
-		x += 10;
-		repaint();
+		if(y==625 || (x==225 && y>300 && y<475)) {
+		}
+		else {
+			x += velX;
+		}
 	}
 	
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub		
-	}
-	
-	@Override
-	public void keyPressed(KeyEvent e) {
-		int key = e.getKeyCode();
-		if (key == KeyEvent.VK_UP) {
-			moveUp();
-		}
-		if (key == KeyEvent.VK_DOWN) {
-			moveDown();
-		}
-		if (key == KeyEvent.VK_LEFT) {
-			moveLeft();
-		}
-		if (key == KeyEvent.VK_RIGHT) {
-			moveRight();
-		}	
+//	Setters and Getters
+	public int getX() {
+		return x;
 	}
 
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
+	public void setX(int x) {
+		this.x = x;
 	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+	
+	
 }
