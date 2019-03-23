@@ -1,26 +1,13 @@
-package Main;
 
-import java.awt.Canvas;
-import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.ArrayList;
-
-import javax.swing.JPanel;
-import javax.swing.Timer;
-
-public class Levels extends JPanel implements KeyListener{
 	
 	
 	
 	/* 
 	0 = spelyta
-	1 = v‰gg
-	2 = karakt‰r
+	1 = v√§gg
+	2 = karakt√§r
 	3 = skatt
-	4 = dˆrr
+	4 = d√∂rr
 	5 = laser
 	*/
 
@@ -35,6 +22,7 @@ public class Levels extends JPanel implements KeyListener{
 	//Creating player and walls
 	Player player = new Player(playerX, playerY ,25,25);
 	Wall w = new Wall(x, y, width, height);
+	Treasure treasure = new Treasure(x , y, width, height);
 	
 	//method for painting to canvas
 
@@ -64,7 +52,7 @@ public class Levels extends JPanel implements KeyListener{
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,0,0,0,0,0,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -100,7 +88,8 @@ public class Levels extends JPanel implements KeyListener{
 					player.paintComponent(g);
 				}
 				if (level1[i][j] == 3) {
-					// Code of treasures
+					treasure = new Treasure(j*25,i*25,width,height);
+					treasure.render(g);
 				}
 				if (level1[i][j] == 4) {
 					// Code of Dorr
