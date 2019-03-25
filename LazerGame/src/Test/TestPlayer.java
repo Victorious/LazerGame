@@ -10,7 +10,6 @@ public class TestPlayer {
 	int x = 20 ,y = 20;
 	@Test
 	public void testPlayerMoveUp() {
-		Player p = new Player(x, y,2,2);
 	}
 	
 	@Test

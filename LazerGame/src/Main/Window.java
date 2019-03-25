@@ -7,12 +7,10 @@ import java.awt.Graphics;
 import javax.swing.JFrame;
 
 public class Window extends Canvas{
-//	This class is not in use for the moment.
-//	Window is beeing implemented directly in game class
 
 	int height, width;
-	
 	JFrame frame;
+	Canvas canvas;
 	
 	public Window(int height, int width) {
 		this.height = height;
@@ -29,12 +27,24 @@ public class Window extends Canvas{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+		
 	
+		canvas = new Canvas();
+		canvas.setPreferredSize(new Dimension(width, height));
+		canvas.setMaximumSize(new Dimension(width, height));
+		canvas.setMinimumSize(new Dimension(width, height));
+		canvas.setFocusable(false);
+		frame.add(canvas);
 		frame.pack();
+		
 	}
 	
 	public JFrame getJFrame() {
 		return frame;
 
 	}	
+	
+	public Canvas getCanvas() {
+		return canvas;
+	}
 }

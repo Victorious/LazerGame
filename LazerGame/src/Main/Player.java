@@ -2,18 +2,23 @@ package Main;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.List;
+import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.logging.Level;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-public class Player extends JComponent{
-
-
-	int x,y;
-	int velX = 10, velY = 10;
-	int width = 25, height = 25;
+public class Player extends GameItem{
+	
+	int  x,y;
+	int velX, velY;
+	int colX, colY;
+	int width, height;
 	
 	public Player(int x, int y, int width, int height) {
+		super(x, y, width, height);
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -21,40 +26,77 @@ public class Player extends JComponent{
 	}
 
 //	Painting player
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
+	public void paint(Graphics g) {
 		g.fillRect(x, y, width, height);
-		repaint();
+		
+	}	
+	
+	public void collisionDown() {
+		for (int i = 0; i < Wall.wallList.size(); i++) {
+			Rectangle w1 = Wall.wallList.get(i);
+			if (((w1.x<x && w1.x+w1.width>x) || (x<w1.x && x+width>w1.x)) && ((y<w1.y && y+height+5>w1.y))){
+				y = w1.y - w1.height-5;
+			}
+		}
 	}
-
+	
+	public void collisionUp() {
+		
+		for (int i = 0; i < Wall.wallList.size(); i++) {
+			Rectangle w1 = Wall.wallList.get(i);
+			if (((w1.x<x && w1.x+w1.width>x) || (x<w1.x && x+width>w1.x)) && ((w1.y<y && w1.y+w1.height+5>y))){
+				y = w1.y + w1.height+5;
+			}
+		}
+	}
+	
+	public void collisionLeft() {
+		System.out.println(x);
+		for (int i = 0; i < Wall.wallList.size(); i++) {
+			Rectangle w1 = Wall.wallList.get(i);
+			if (((w1.x<x && w1.x+w1.width+5>x))&&  ((w1.y<y && w1.y+w1.height>y) || (y<w1.y && y+height>w1.y))){
+				x = w1.x + w1.width+5;
+			}
+		}
+	}
+	
+	public void collisionRight() {
+		System.out.println(x);
+		for (int i = 0; i < Wall.wallList.size(); i++) {
+			Rectangle w1 = Wall.wallList.get(i);
+			if (((x<w1.x && x+width+5>w1.x)) && ((w1.y<y && w1.y+w1.height>y) || (y<w1.y && y+height>w1.y))){
+				x = w1.x - w1.width-5;
+			}
+		}
+	}
+	
 //	Movement functions
-	public void moveUp() {
-		if(y==25) {
-		}
-		else {
+	public int moveUp(int velY) {
+		collisionUp();
 		y -= velY;
-		}
+		return y;
 	}
-	public void moveDown() {
-		if(y==625) {
-		}
-		else {
+	
+	public int moveDown(int velY) {
+		collisionDown();
 		y += velY;
-		}
+		return y;
 	}
-	public void moveLeft() {
-		if(x==25) {
-		}
-		else {
-			x -= velX;
-		}
+	
+	public int moveLeft(int velX) {
+		collisionLeft();
+		x -= velX;	
+		return x;
 	}
-	public void moveRight() {
-		if(x==675) {
-		}
-		else {
-			x += velX;
-		}
+	
+	public int moveRight(int velX) {
+		collisionRight();
+		x += velX;
+		return x;
+	}
+	
+	public Rectangle getOffsetBounds() {
+		return new Rectangle(x, y, width, height);
 	}
 	
 //	Setters and getters
@@ -73,5 +115,23 @@ public class Player extends JComponent{
 	public void setY(int y) {
 		this.y = y;
 	}
+
+	public int getVelX() {
+		return velX;
+	}
+
+	public void setVelX(int velX) {
+		this.velX = velX;
+	}
+
+	public int getVelY() {
+		return velY;
+	}
+
+	public void setVelY(int velY) {
+		this.velY = velY;
+	}
+	
+	
 	
 }

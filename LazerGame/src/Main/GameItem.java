@@ -12,11 +12,5 @@ public abstract class GameItem {
 		this.y = y;
 		this.width = width;
 		this.height = height;
-	}
-
-	public void paintComponent(Graphics g) {
-		// TODO Auto-generated method stub
-		
-	}
-	
+	}	
 }
