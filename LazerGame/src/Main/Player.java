@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import java.awt.List;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.logging.Level;
 
 import javax.swing.JComponent;
@@ -25,45 +27,51 @@ public class Player extends GameItem{
 		this.height = height;
 	}
 
+	
+	
 //	Painting player
 	public void paint(Graphics g) {
+		
 		g.fillRect(x, y, width, height);
 		
 	}	
 	
+//	If player collision down
 	public void collisionDown() {
 		for (int i = 0; i < Wall.wallList.size(); i++) {
-			Rectangle w1 = Wall.wallList.get(i);
+			Wall w1 = Wall.wallList.get(i);
 			if (((w1.x<x && w1.x+w1.width>x) || (x<w1.x && x+width>w1.x)) && ((y<w1.y && y+height+5>w1.y))){
 				y = w1.y - w1.height-5;
 			}
-		}
+		}	
 	}
 	
+//	If player collision up
 	public void collisionUp() {
-		
 		for (int i = 0; i < Wall.wallList.size(); i++) {
-			Rectangle w1 = Wall.wallList.get(i);
+			Wall w1 = Wall.wallList.get(i);
 			if (((w1.x<x && w1.x+w1.width>x) || (x<w1.x && x+width>w1.x)) && ((w1.y<y && w1.y+w1.height+5>y))){
 				y = w1.y + w1.height+5;
 			}
 		}
 	}
-	
+
+//	If player collision left
 	public void collisionLeft() {
 		System.out.println(x);
 		for (int i = 0; i < Wall.wallList.size(); i++) {
-			Rectangle w1 = Wall.wallList.get(i);
+			Wall w1 = Wall.wallList.get(i);
 			if (((w1.x<x && w1.x+w1.width+5>x))&&  ((w1.y<y && w1.y+w1.height>y) || (y<w1.y && y+height>w1.y))){
 				x = w1.x + w1.width+5;
 			}
-		}
+		}	
 	}
 	
+//	If player collision right
 	public void collisionRight() {
 		System.out.println(x);
 		for (int i = 0; i < Wall.wallList.size(); i++) {
-			Rectangle w1 = Wall.wallList.get(i);
+			Wall w1 = Wall.wallList.get(i);
 			if (((x<w1.x && x+width+5>w1.x)) && ((w1.y<y && w1.y+w1.height>y) || (y<w1.y && y+height>w1.y))){
 				x = w1.x - w1.width-5;
 			}

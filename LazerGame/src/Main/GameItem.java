@@ -2,7 +2,9 @@ package Main;
 
 import java.awt.Graphics;
 
-public abstract class GameItem {
+import javax.swing.JComponent;
+
+public abstract class GameItem extends JComponent {
 
 	int x,y;
 	int width, height;

@@ -8,13 +8,12 @@ import java.util.ArrayList;
 public class Wall extends GameItem {
 		
 
-	static ArrayList<Rectangle> wallList = new ArrayList<Rectangle>();
+	static ArrayList<Wall> wallList = new ArrayList<Wall>();
 	
 	int x;
 	int y;
 	int width;
 	int height;
-	Boolean visible;
 	
 	public Wall(int x, int y, int width, int height) {
 		super(x,y,width,height);
@@ -22,7 +21,6 @@ public class Wall extends GameItem {
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		this.visible = true;
 	}
 
 	public void paint(Graphics g) {
@@ -48,20 +46,8 @@ public class Wall extends GameItem {
 		this.y = y;
 	}
 	
-	public void setVisisble(Boolean visible) {
-		this.visible = visible;
-	}
-	
 	public Rectangle getBounds() {
 		return new Rectangle(x,y,width,height);
 	}
-	
-	public Rectangle setBounds(int x,int y,int width,int height) {
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-		return new Rectangle(x,y,width,height);
-	}
-	
+
 }
