@@ -14,31 +14,31 @@ public class TestPlayer {
 		p.moveUp(10);
 		int yActual = p.getY();
 		assertEquals(yActual, 10);
-		
 	}
 	
-	@Test
-	public void testPlayerMoveUp2() {
-		Player p = new Player(x, 40, 10, 10);
-		p.moveUp(10);
-		int yActual = p.getY();
-		assertEquals(yActual, 30);
-		
-	}
-	
+
 	@Test
 	public void testPlayerMoveDown() {
-		
+		Player p = new Player(x, y, 10, 10);
+		p.moveDown(10);
+		int yActual = p.getY();
+		assertEquals(yActual, 30);
 	}
 	
 	@Test
 	public void testPlayerMoveLeft() {
-		
+		Player p = new Player(x, y, 10, 10);
+		p.moveLeft(10);
+		int yActual = p.getX();
+		assertEquals(yActual, 10);
 	}
 	
 	@Test
 	public void testPlayerMoveRight() {
-		
+		Player p = new Player(x, y, 10, 10);
+		p.moveRight(10);
+		int yActual = p.getX();
+		assertEquals(yActual, 30);
 	}
 	
 	@Test
