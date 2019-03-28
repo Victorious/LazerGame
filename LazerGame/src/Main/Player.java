@@ -1,43 +1,57 @@
 package Main;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.List;
 import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.ListIterator;
-import java.util.logging.Level;
+import java.awt.event.KeyEvent;
 
-import javax.swing.JComponent;
-import javax.swing.JPanel;
 
 public class Player extends GameItem{
 	
-	int  x,y;
 	int velX, velY;
-	int colX, colY;
-	int width, height;
+	int treasuresLevel1 = 0;
 	
-	public Player(int x, int y, int width, int height) {
-		super(x, y, width, height);
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
+	KeyManager keyManager = new KeyManager(); 
+	
+	public Player(int x, int y, int width, int height, Game game) {
+		super(x, y, width, height, game);
+	}
+	
+	public void KeyBindings() {
+		keyManager.addKeyBinding(game, KeyEvent.VK_UP, "moveUp", (evt) -> {
+			moveUp(5);
+		});
+		keyManager.addKeyBinding(game, KeyEvent.VK_DOWN, "moveDown", (evt) -> {
+			moveDown(5);
+		});
+		keyManager.addKeyBinding(game, KeyEvent.VK_LEFT, "moveLeft", (evt) -> {
+			moveLeft(5);
+		});
+		keyManager.addKeyBinding(game, KeyEvent.VK_RIGHT, "moveRight", (evt) -> {
+			moveRight(5);
+		});
+	}
+	
+	@Override
+	public void update() {
+		
 	}
 
-	
-	
 //	Painting player
-	public void paint(Graphics g) {
-		
+	@Override
+	public void render(Graphics g) {
 		g.fillRect(x, y, width, height);
 		
 	}	
 	
 //	If player collision down
 	public void collisionDown() {
+		for (int i = 0; i < game.laserBlockList.size(); i++) {
+			LaserBlock l1 = game.laserBlockList.get(i);
+			if (((l1.x<x && l1.x+l1.width>x) || (x<l1.x && x+width>l1.x)) && ((y<l1.y && y+height+5>l1.y))){
+				y = l1.y - l1.height-5;
+			}
+		}
+		
 		for (int i = 0; i < Wall.wallList.size(); i++) {
 			Wall w1 = Wall.wallList.get(i);
 			if (((w1.x<x && w1.x+w1.width>x) || (x<w1.x && x+width>w1.x)) && ((y<w1.y && y+height+5>w1.y))){
@@ -48,6 +62,13 @@ public class Player extends GameItem{
 	
 //	If player collision up
 	public void collisionUp() {
+		for (int i = 0; i < game.laserBlockList.size(); i++) {
+			LaserBlock l1 = game.laserBlockList.get(i);
+			if (((l1.x<x && l1.x+l1.width>x) || (x<l1.x && x+width>l1.x)) && ((l1.y<y && l1.y+l1.height+5>y))){
+				y = l1.y + l1.height+5;
+			}
+		}
+		
 		for (int i = 0; i < Wall.wallList.size(); i++) {
 			Wall w1 = Wall.wallList.get(i);
 			if (((w1.x<x && w1.x+w1.width>x) || (x<w1.x && x+width>w1.x)) && ((w1.y<y && w1.y+w1.height+5>y))){
@@ -58,7 +79,13 @@ public class Player extends GameItem{
 
 //	If player collision left
 	public void collisionLeft() {
-		System.out.println(x);
+		for (int i = 0; i < game.laserBlockList.size(); i++) {
+			LaserBlock l1 = game.laserBlockList.get(i);
+			if (((l1.x<x && l1.x+l1.width+5>x))&&  ((l1.y<y && l1.y+l1.height>y) || (y<l1.y && y+height>l1.y))){
+				x = l1.x + l1.width+5;
+			}
+		}	
+		
 		for (int i = 0; i < Wall.wallList.size(); i++) {
 			Wall w1 = Wall.wallList.get(i);
 			if (((w1.x<x && w1.x+w1.width+5>x))&&  ((w1.y<y && w1.y+w1.height>y) || (y<w1.y && y+height>w1.y))){
@@ -69,7 +96,13 @@ public class Player extends GameItem{
 	
 //	If player collision right
 	public void collisionRight() {
-		System.out.println(x);
+		for (int i = 0; i < game.laserBlockList.size(); i++) {
+			LaserBlock l1 = game.laserBlockList.get(i);
+			if (((x<l1.x && x+width+5>l1.x)) && ((l1.y<y && l1.y+l1.height>y) || (y<l1.y && y+height>l1.y))){
+				x = l1.x - l1.width-5;
+			}
+		}
+		
 		for (int i = 0; i < Wall.wallList.size(); i++) {
 			Wall w1 = Wall.wallList.get(i);
 			if (((x<w1.x && x+width+5>w1.x)) && ((w1.y<y && w1.y+w1.height>y) || (y<w1.y && y+height>w1.y))){
@@ -139,7 +172,4 @@ public class Player extends GameItem{
 	public void setVelY(int velY) {
 		this.velY = velY;
 	}
-	
-	
-	
 }

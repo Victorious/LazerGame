@@ -9,23 +9,21 @@ public class Wall extends GameItem {
 		
 
 	static ArrayList<Wall> wallList = new ArrayList<Wall>();
+
 	
-	int x;
-	int y;
-	int width;
-	int height;
-	
-	public Wall(int x, int y, int width, int height) {
-		super(x,y,width,height);
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
+	public Wall(int x, int y, int width, int height,Game game) {
+		super(x,y,width,height,game);
 	}
 
-	public void paint(Graphics g) {
+	@Override
+	public void render(Graphics g) {
 		g.setColor(Color.GRAY);
 		g.fillRect(x, y, width, height);
+		
+	}
+	
+	@Override
+	public void update() {
 		
 	}
 

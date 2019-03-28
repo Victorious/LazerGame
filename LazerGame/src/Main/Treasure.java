@@ -3,29 +3,33 @@ package Main;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.util.ArrayList;
 
 public class Treasure extends GameItem {
 	
-	static ArrayList<Treasure> treasureList = new ArrayList<Treasure>();
-	
-	private int treasureCounter;
-	
-	Boolean isVisible;
-	int x,y;
-	int width, height;
 	Graphics g;
-	public Treasure(int x, int y,int width,int height) {
-		super(x,y,width,height);
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
+	
+	public Treasure(int x, int y,int width,int height,Game game) {
+		super(x,y,width,height, game);
 	}
 	
 	public void render (Graphics g) {
-		g.setColor(Color.yellow);
-		g.fillRect(x, y, width, height);	
+		g.setColor(Color.orange);
+		g.fillRect(x, y, width, height);
+		treasureCollect();
+	}
+	
+	public void update() {
+	}
+	
+	public void treasureCollect() {
+		Rectangle r = game.player.getOffsetBounds();
+		for (int i = 0; i < game.treasureList.size(); i++) {
+			Treasure t = game.treasureList.get(i);
+			Rectangle r1 = t.getBounds();
+			if (r.intersects(r1)) {
+				game.removeTreasure(t);
+			}
+		}
 	}
 	
 	public int getX() {
@@ -60,17 +64,6 @@ public class Treasure extends GameItem {
 		this.height = height;
 	}
 
-	public void isVisible(Graphics g) {	
-	}
-	
-	public Boolean getIsVisible() {
-		return isVisible;
-	}
-
-	public void setIsVisible(Boolean isVisible) {
-		this.isVisible = isVisible;
-	}
-	
 	public Rectangle getBounds() {
 		return new Rectangle(x,y,width,height);
 	}
