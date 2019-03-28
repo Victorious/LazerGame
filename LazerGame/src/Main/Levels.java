@@ -1,13 +1,11 @@
 package Main;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.image.BufferStrategy;
+
 
 import javax.swing.JComponent;
 
-import javax.swing.Timer;
 
 public class Levels extends JComponent{
 	
@@ -19,32 +17,41 @@ public class Levels extends JComponent{
 	3 = skatt
 	4 = dörr
 	5 = laser
+	9 = status
 	*/
+	
 	// Variables
+	BufferStrategy bs;
+
 	int gameStarted = 1;
 	int width = 30, height = 30;
 	int x,y;
+	int treasurCount = 0;
+	
 	//Creating player and walls
-	Wall w = new Wall(x, y, width, height);
-	Treasure treasure = new Treasure(x , y, width, height);
-	Player player = new Player(x, y, width, height);
-
-	//method for painting to canvas
-	public void paint(Graphics g) {
-		super.paintComponent(g);
-		player.paint(g);
-
+	Game game;
+	Wall w = new Wall(x, y, width, height,game);
+	Treasure temptreasure;
+	LaserBlock tempLaserBlock;
+	
+	public Levels(Game game) {
+		this.game = game;
 	}
 
+	public void render() {
+	}
+	
 	public void level1(Graphics g) {
+		
 		int[][] level1 = {
-
+				{9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9},
+				{9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9},
 				{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,3,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1},
+				{1,1,1,1,1,1,1,1,1,1,1,1,1,5,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -53,6 +60,8 @@ public class Levels extends JComponent{
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -60,44 +69,53 @@ public class Levels extends JComponent{
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,9}
+				{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 			};
 //		Loop for checking each pixel in the canvas and printing depended on which number each pixel precent
-		
+
 			for (int i = 0; i < level1.length; i++) {
 
 				for (int j = 0; j < level1[i].length; j++) {
 					
 					if(level1[i][j]==1) {
-					w = new Wall(j*25, i*25, width, height);
-					w.paint(g);
+					w = new Wall(j*25, i*25, width, height,game);
+					w.render(g);
 					Wall.wallList.add(w);
 					}
 					if (level1[i][j] == 2) {
 						if (gameStarted == 1) {
-							player.setX(j*25);
-							player.setY(i*25);
-							player.paint(g);
+						game.player.setX(j*25);
+						game.player.setY(i*25);
 						}
 						gameStarted = 0;
 					}
 					if (level1[i][j] == 3) {
-
-						treasure = new Treasure(j*25,i*25,width,height);
-						treasure.render(g);
-						Treasure.treasureList.add(treasure);
-						
+						if (treasurCount < 5) {
+							treasurCount = treasurCount + 1;
+							game.addTreasure(new Treasure(j*25, i*25, 15, 15, game));
+						}
+						for (int j2 = 0; j2 < game.treasureList.size(); j2++) {
+							if (j2 <= 5) {
+								temptreasure = game.treasureList.get(j2);
+								temptreasure.render(game.g);
+							}
+						}	
 					}
 					if (level1[i][j] == 4) {
 						// Code of Dorr
 					}
 					if (level1[i][j] == 5) {
-						// Code of Lazer
+						game.addLaserBlock(new LaserBlock(j*25, i*25, width, height, game));
+						game.addLaser(new Laser(j*25, i*25, width, height, game));
+						for (int j2 = 0; j2 < game.laserBlockList.size(); j2++) {
+							if (j2 <= 5) {
+								tempLaserBlock = game.laserBlockList.get(j2);
+								tempLaserBlock.render(game.g);
+							}
+						}	
 					}		
 				}
 			}

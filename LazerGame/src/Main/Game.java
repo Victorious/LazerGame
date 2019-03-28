@@ -1,25 +1,30 @@
 package Main;
 
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Frame;
+
 import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
 
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 
-public class Game extends Canvas implements Runnable{
+public class Game extends JComponent implements Runnable{
 
-	static int height = 725;
-	static int width = 745;
+	int height = 780;
+	int width = 745;
 
+	int itemHeight = 25;
+	int itemWidth = 25;
+	
 	int x,y;
-	KeyManager keyManager = new KeyManager();
-	Levels lvl = new Levels();
+//	Item lists
+	ArrayList<Treasure> treasureList = new ArrayList<Treasure>();
+	ArrayList<Laser> laserList = new ArrayList<Laser>();
+	ArrayList<LaserBlock> laserBlockList = new ArrayList<LaserBlock>();
+	
+//	Creating objects
+	Levels lvl = new Levels(this);
+	Laser tempLaser = new Laser(x, y, itemWidth, height, this);
+	Player player = new Player(x, y, itemWidth, itemHeight, this);
 	Window window;
 	Boolean isRunning = false;
 	Thread thread;
@@ -34,6 +39,7 @@ public class Game extends Canvas implements Runnable{
 	// Constructor for Game class, implementing the running method
 	public Game() {
 		run();
+		init();
 	}
 
 //	Starting thread
@@ -61,12 +67,11 @@ public class Game extends Canvas implements Runnable{
 //	Initilizing startup
 	public void init() {
 		window = new Window(height, width);
-		KeyBindings();
+//		KeyBindings();
 	}
 	
 //	Game Loop
 	public void run() {
-		init();
 		int fps = 60;
 		double timePerTick = 1000000000 / fps;
 		double delta = 0;
@@ -81,8 +86,8 @@ public class Game extends Canvas implements Runnable{
 		timer += now - lastTime;
 		lastTime = now;
 			if (delta >= 1) {
-				update();
-				render();		
+				render();
+				update(); 	
 				ticks++;
 				delta--;
 			}
@@ -92,62 +97,60 @@ public class Game extends Canvas implements Runnable{
 			}
 		}
 	}
-	
-	public void treasureCollect(Graphics g) {
-		Rectangle r = lvl.player.getOffsetBounds();
-		for (int i = 0; i < Treasure.treasureList.size(); i++) {
-			Treasure t = Treasure.treasureList.get(i);
-			Rectangle r1 = t.getBounds();
-			if (r.intersects(r1)) {
-				System.out.println("tres");
-				g.setColor(Color.green);
-				g.fillRect(t.x, t.y, t.width, t.height);
-				g.clearRect(t.x, t.y, t.width, t.height);
-
-				repaint();
-				
-				
-			}
-		}
-	}
 //	Updating the game
 	public void update() {
-
+		player.KeyBindings();
+		for (int i = 0; i <laserList.size(); i	++) {
+			tempLaser = laserList.get(i);
+			tempLaser.update();
+		}
 	}
 	
-	// All Graphics goes here
+//	All Graphics goes here
 	public void render() {
-		window.getJFrame().add(lvl);
+		window.getJFrame().add(this);
 		bs = window.getCanvas().getBufferStrategy();
 		if (bs == null) {
 			window.getCanvas().createBufferStrategy(3);
 			return;
 		}
+
 		g = bs.getDrawGraphics();
 		g.clearRect(0, 0, width, height);
-		treasureCollect(g);
-		lvl.paint(g);
+		player.render(g);
 		lvl.level1(g);
-		
+		for (int i = 0; i <laserList.size(); i	++) {
+			tempLaser = laserList.get(i);
+			tempLaser.render(g);
+		}
 		bs.show();
 		g.dispose();
 		
 	}
 	
-//	KeyBindings for movement
-	public void KeyBindings() {
-		keyManager.addKeyBinding(lvl, KeyEvent.VK_UP, "moveUp", (evt) -> {
-			lvl.player.moveUp(5);
-		});
-		keyManager.addKeyBinding(lvl, KeyEvent.VK_DOWN, "moveDown", (evt) -> {
-			lvl.player.moveDown(5);
-		});
-		keyManager.addKeyBinding(lvl, KeyEvent.VK_LEFT, "moveLeft", (evt) -> {
-			lvl.player.moveLeft(5);
-		});
-		keyManager.addKeyBinding(lvl, KeyEvent.VK_RIGHT, "moveRight", (evt) -> {
-			lvl.player.moveRight(5);
-		});
+	public void addTreasure(Treasure block) {
+		treasureList.add(block);
+	}
+
+	public void removeTreasure(Treasure block) {
+		treasureList.remove(block);
+		player.treasuresLevel1 += 1;
+		System.out.println("You got " + player.treasuresLevel1 + " treasures");
+		if (player.treasuresLevel1 == 5) {
+			System.out.println("Congrats you cleared level1");
+		}
+	}
+	
+	public void addLaser(Laser block) {
+		laserList.add(block);
+	}
+	
+	public void removeLaser(Laser block) {
+		laserList.remove(block);
+	}
+
+	public void addLaserBlock(LaserBlock block) {
+		laserBlockList.add(block);
 	}
 
 }
