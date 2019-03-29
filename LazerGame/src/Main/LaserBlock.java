@@ -17,7 +17,7 @@ public class LaserBlock extends GameItem {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		y += 2;
 		
 	}
 

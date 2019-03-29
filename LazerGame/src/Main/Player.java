@@ -9,6 +9,9 @@ public class Player extends GameItem{
 	
 	int velX, velY;
 	int treasuresLevel1 = 0;
+	int health = 5;
+	int startPosY;
+	int startPosX;
 	
 	KeyManager keyManager = new KeyManager(); 
 	
@@ -33,15 +36,22 @@ public class Player extends GameItem{
 	
 	@Override
 	public void update() {
-		
+		dead();
 	}
 
 //	Painting player
 	@Override
 	public void render(Graphics g) {
-		g.fillRect(x, y, width, height);
-		
+		g.fillRect(x, y, width, height);		
 	}	
+	
+	public void dead() {
+		if (health == 0) {
+			System.out.println("Dead");
+			health = 5;
+			System.out.println("Health = " + health);
+		}
+	}
 	
 //	If player collision down
 	public void collisionDown() {
@@ -157,19 +167,21 @@ public class Player extends GameItem{
 		this.y = y;
 	}
 
-	public int getVelX() {
-		return velX;
+	public int getStartPosY() {
+		return startPosY;
 	}
 
-	public void setVelX(int velX) {
-		this.velX = velX;
+	public void setStartPosY(int startPosY) {
+		this.startPosY = startPosY;
 	}
 
-	public int getVelY() {
-		return velY;
+	public int getStartPosX() {
+		return startPosX;
 	}
 
-	public void setVelY(int velY) {
-		this.velY = velY;
+	public void setStartPosX(int startPosX) {
+		this.startPosX = startPosX;
 	}
+	
+	
 }

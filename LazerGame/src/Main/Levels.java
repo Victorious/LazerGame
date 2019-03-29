@@ -27,18 +27,26 @@ public class Levels extends JComponent{
 	int width = 30, height = 30;
 	int x,y;
 	int treasurCount = 0;
+	int laserCount = 0;
+	int numberLaserBlock = 3;
 	
 	//Creating player and walls
 	Game game;
 	Wall w = new Wall(x, y, width, height,game);
 	Treasure temptreasure;
 	LaserBlock tempLaserBlock;
+	Laser tempLaser;
 	
 	public Levels(Game game) {
 		this.game = game;
 	}
 
 	public void render() {
+		
+	}
+	
+	public void update() {
+		
 	}
 	
 	public void level1(Graphics g) {
@@ -46,12 +54,12 @@ public class Levels extends JComponent{
 		int[][] level1 = {
 				{9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9},
 				{9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9},
-				{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+				{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,5,1,1,1,1,1,1,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,3,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,1,1,1,1,1,1,1,1,1,1,1,1,5,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1},
+				{1,1,1,1,1,1,1,5,1,1,1,1,1,5,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -89,6 +97,8 @@ public class Levels extends JComponent{
 						if (gameStarted == 1) {
 						game.player.setX(j*25);
 						game.player.setY(i*25);
+						game.player.setStartPosX(j*25);
+						game.player.setStartPosY(i*25);
 						}
 						gameStarted = 0;
 					}
@@ -108,8 +118,12 @@ public class Levels extends JComponent{
 						// Code of Dorr
 					}
 					if (level1[i][j] == 5) {
-						game.addLaserBlock(new LaserBlock(j*25, i*25, width, height, game));
-						game.addLaser(new Laser(j*25, i*25, width, height, game));
+						if (laserCount < numberLaserBlock) {
+							game.addLaserBlock(new LaserBlock(j*25, i*25, width, height, game));
+							game.addLaser(new Laser(j*25, i*25, width, height, game));
+							laserCount = laserCount + 1;
+						}
+
 						for (int j2 = 0; j2 < game.laserBlockList.size(); j2++) {
 							if (j2 <= 5) {
 								tempLaserBlock = game.laserBlockList.get(j2);

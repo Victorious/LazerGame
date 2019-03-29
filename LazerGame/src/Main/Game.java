@@ -2,10 +2,13 @@ package Main;
 
 
 import java.awt.Graphics;
+import java.awt.PopupMenu;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 
 import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class Game extends JComponent implements Runnable{
 
@@ -21,7 +24,7 @@ public class Game extends JComponent implements Runnable{
 	ArrayList<Laser> laserList = new ArrayList<Laser>();
 	ArrayList<LaserBlock> laserBlockList = new ArrayList<LaserBlock>();
 	
-//	Creating objects
+//	Creating objects	
 	Levels lvl = new Levels(this);
 	Laser tempLaser = new Laser(x, y, itemWidth, height, this);
 	Player player = new Player(x, y, itemWidth, itemHeight, this);
@@ -67,7 +70,6 @@ public class Game extends JComponent implements Runnable{
 //	Initilizing startup
 	public void init() {
 		window = new Window(height, width);
-//		KeyBindings();
 	}
 	
 //	Game Loop
@@ -100,10 +102,13 @@ public class Game extends JComponent implements Runnable{
 //	Updating the game
 	public void update() {
 		player.KeyBindings();
+		player.update();
+//		Updating each laser
 		for (int i = 0; i <laserList.size(); i	++) {
-			tempLaser = laserList.get(i);
+			tempLaser = laserList.get(i);	
 			tempLaser.update();
 		}
+	
 	}
 	
 //	All Graphics goes here
@@ -114,13 +119,15 @@ public class Game extends JComponent implements Runnable{
 			window.getCanvas().createBufferStrategy(3);
 			return;
 		}
-
+		
 		g = bs.getDrawGraphics();
 		g.clearRect(0, 0, width, height);
 		player.render(g);
 		lvl.level1(g);
-		for (int i = 0; i <laserList.size(); i	++) {
-			tempLaser = laserList.get(i);
+		
+//		Drawing each laser
+		for (int i = 0; i < laserList.size(); i	++) {
+			tempLaser = laserList.get(i);	
 			tempLaser.render(g);
 		}
 		bs.show();
