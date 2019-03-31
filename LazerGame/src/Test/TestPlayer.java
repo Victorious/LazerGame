@@ -105,7 +105,7 @@ public class TestPlayer {
 	@Test
 	public void CollisionInWallUp() {
 		Player p = new Player(30, 80, 25, 25, game);
-		p.collisionLeft();
+		p.collisionUp();
 		int Actual = p.getY();
 		assertEquals(Actual, 80);
 		}
