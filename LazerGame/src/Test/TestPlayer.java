@@ -76,6 +76,39 @@ public class TestPlayer {
 		int yActual = p.getX();
 		assertEquals(yActual, 107);
 	}
+	
+	
+		@Test
+	public void CollisionInWallLeft() {
+		Player p = new Player(30, 80, 25, 25, game);
+		p.collisionLeft();
+		int Actual = p.getX();
+		assertEquals(Actual, 30);
+		}
+	
+	@Test
+	public void CollisionInWallRight() {
+		Player p = new Player(670, 80, 25, 25, game);
+		p.collisionRight();
+		int Actual = p.getX();
+		assertEquals(Actual, 670);
+		}
+	
+	@Test
+	public void CollisionInWallDown() {
+		Player p = new Player(30, 675, 25, 25, game);
+		p.collisionDown();
+		int Actual = p.getY();
+		assertEquals(Actual, 675);
+		}
+	
+	@Test
+	public void CollisionInWallUp() {
+		Player p = new Player(30, 80, 25, 25, game);
+		p.collisionLeft();
+		int Actual = p.getY();
+		assertEquals(Actual, 80);
+		}
 
 
 }
