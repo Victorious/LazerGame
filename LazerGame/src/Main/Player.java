@@ -5,7 +5,11 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
+
+@SuppressWarnings("serial")
 public class Player extends GameItem{
 	
 	int velX, velY;
@@ -45,14 +49,25 @@ public class Player extends GameItem{
 	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.black);
-		g.fillRect(x, y, width, height);		
+		g.fillRect(x, y, width, height);	
+
 	}	
+	
+	public void restartGame() {
+		health = 5;
+		System.out.println("Health = " + health);
+	}
 	
 	public void dead() {
 		if (health == 0) {
 			System.out.println("Dead");
-			health = 5;
-			System.out.println("Health = " + health);
+			JFrame f = new JFrame();
+			int selectedOption = JOptionPane.showConfirmDialog(f, "You died, Do you wanna try again?");
+			if (selectedOption == JOptionPane.YES_OPTION) {
+				restartGame();
+			} else if (selectedOption == JOptionPane.NO_OPTION) {
+				
+			}
 		}
 		else {
 		}
@@ -194,6 +209,14 @@ public class Player extends GameItem{
 
 	public void setHealth(int health) {
 		this.health = health;
+	}
+
+	public int getTreasuresLevel1() {
+		return treasuresLevel1;
+	}
+
+	public void setTreasuresLevel1(int treasuresLevel1) {
+		this.treasuresLevel1 = treasuresLevel1;
 	}
 	
 	

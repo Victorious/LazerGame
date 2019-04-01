@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+@SuppressWarnings("serial")
 public class Treasure extends GameItem {
 	
 	Graphics g;

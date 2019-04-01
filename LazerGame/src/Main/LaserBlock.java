@@ -3,6 +3,7 @@ package Main;
 import java.awt.Color;
 import java.awt.Graphics;
 
+@SuppressWarnings("serial")
 public class LaserBlock extends GameItem {
 
 	public LaserBlock(int x, int y, int width, int height, Game game) {

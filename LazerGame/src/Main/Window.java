@@ -3,13 +3,11 @@ package Main;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
 
-import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class Window extends Canvas{
 
 	int height, width;

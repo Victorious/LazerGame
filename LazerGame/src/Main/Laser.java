@@ -5,19 +5,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
-import javax.swing.Timer;
-
-
-
+@SuppressWarnings("serial")
 public class Laser extends GameItem {
 	int end = y+55;
 	int start = y;
-	Timer t;
+
 	public Laser(int x, int y, int width, int height, Game game) {
 		super(x, y, width, height, game);
 	}
@@ -42,7 +35,7 @@ public class Laser extends GameItem {
 
 		
 	}
-	
+//	Checking if laser has collision with any laser
 	public void laserHitPlayer() {
 		Rectangle r = game.player.getOffsetBounds();
 		for (int i = 0; i < game.laserList.size(); i++) {
@@ -50,7 +43,7 @@ public class Laser extends GameItem {
 			Rectangle r1 = l.getBounds();
 			if (r.intersects(r1)) {
 				game.player.health -= 1;
-				System.out.println("Health = " + game.player.health);
+				System.out.println("Health = " + game.player.getHealth());
 				game.player.setX(game.player.startPosX);
 				game.player.setY(game.player.startPosY);
 				return;

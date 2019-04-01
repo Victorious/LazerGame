@@ -1,16 +1,13 @@
 package Main;
 
-
 import java.awt.Graphics;
-import java.awt.PopupMenu;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 
+@SuppressWarnings("serial")
 public class Game extends JComponent implements Runnable{
 
 	int height = 780;
@@ -20,6 +17,8 @@ public class Game extends JComponent implements Runnable{
 	int itemWidth = 25;
 	
 	int x,y;
+	
+	int restartGame = 0;
 //	Item lists
 	ArrayList<Treasure> treasureList = new ArrayList<Treasure>();
 	ArrayList<Laser> laserList = new ArrayList<Laser>();
@@ -105,11 +104,11 @@ public class Game extends JComponent implements Runnable{
 	}
 //	Updating the game
 	public void update() {
-		if (player.getHealth() != 0) {
 			player.KeyBindings();
 			player.update();
+
+			if (player.getHealth() != 0) {
 	//		Updating each laser
-			
 			for (int i = 0; i <laserList.size(); i	++) {
 				tempLaser = laserList.get(i);	
 				tempLaser.update();
@@ -129,8 +128,8 @@ public class Game extends JComponent implements Runnable{
 		g = bs.getDrawGraphics();
 		g.clearRect(0, 0, width, height);
 		lvl.render(g);
+		player.render(g);
 		if (player.health != 0) {
-			player.render(g);
 	//		Drawing each laser
 			for (int i = 0; i < laserList.size(); i	++) {
 				tempLaser = laserList.get(i);	
@@ -140,7 +139,8 @@ public class Game extends JComponent implements Runnable{
 		bs.show();
 		g.dispose();
 	}
-	
+
+//	Adding and Removing certain objects
 	public void addTreasure(Treasure block) {
 		treasureList.add(block);
 	}
@@ -150,7 +150,12 @@ public class Game extends JComponent implements Runnable{
 		player.treasuresLevel1 += 1;
 		System.out.println("You got " + player.treasuresLevel1 + " treasures");
 		if (player.treasuresLevel1 == 5) {
-			System.out.println("Congrats you cleared level1");
+			int option = JOptionPane.showOptionDialog(null, "You won the game!, press ok to exit game","Cleared Game",JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE,null,null,null);
+			if (option == JOptionPane.OK_OPTION) {
+				window.getJFrame().dispose();
+			} else if (option == JOptionPane.CANCEL_OPTION) {
+				window.getJFrame().dispose();
+			} 
 		}
 	}
 	
@@ -165,4 +170,32 @@ public class Game extends JComponent implements Runnable{
 	public void addLaserBlock(LaserBlock block) {
 		laserBlockList.add(block);
 	}
+	
+//	Getters and Setters
+	public ArrayList<Treasure> getTreasureList() {
+		return treasureList;
+	}
+
+	public void setTreasureList(ArrayList<Treasure> treasureList) {
+		this.treasureList = treasureList;
+	}
+
+	public ArrayList<Laser> getLaserList() {
+		return laserList;
+	}
+
+	public void setLaserList(ArrayList<Laser> laserList) {
+		this.laserList = laserList;
+	}
+
+	public ArrayList<LaserBlock> getLaserBlockList() {
+		return laserBlockList;
+	}
+
+	public void setLaserBlockList(ArrayList<LaserBlock> laserBlockList) {
+		this.laserBlockList = laserBlockList;
+	}
+	
+	
+	
 }
