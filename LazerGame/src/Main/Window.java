@@ -1,5 +1,6 @@
 package Main;
 
+import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -32,12 +33,17 @@ public class Window extends Canvas{
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		
+		panel = new JPanel();
+		panel.setPreferredSize(new Dimension(width, height));
+		panel.setMaximumSize(new Dimension(width, height));
+		panel.setMinimumSize(new Dimension(width, height));
+		
 		canvas = new Canvas();
 		canvas.setPreferredSize(new Dimension(width, height));
 		canvas.setMaximumSize(new Dimension(width, height));
 		canvas.setMinimumSize(new Dimension(width, height));
 		canvas.setFocusable(false);
-		frame.add(canvas);
+		frame.add(canvas, BorderLayout.CENTER);
 		
 		frame.pack();	
 	}

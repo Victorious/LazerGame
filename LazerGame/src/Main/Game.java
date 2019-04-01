@@ -6,6 +6,7 @@ import java.awt.PopupMenu;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,12 +28,13 @@ public class Game extends JComponent implements Runnable{
 //	Creating objects	
 	Levels lvl = new Levels(this);
 	Laser tempLaser = new Laser(x, y, itemWidth, height, this);
-	Player player = new Player(x, y, itemWidth, itemHeight, this);
+	Player player = new Player(x, y, itemWidth, itemHeight, this, 5);
 	Window window;
 	Boolean isRunning = false;
 	Thread thread;
 	BufferStrategy bs;
 	Graphics g;
+	
 	
 	public static void main(String[] args) {
 		Game game = new Game();
@@ -70,6 +72,8 @@ public class Game extends JComponent implements Runnable{
 //	Initilizing startup
 	public void init() {
 		window = new Window(height, width);
+
+
 	}
 	
 //	Game Loop
@@ -101,14 +105,16 @@ public class Game extends JComponent implements Runnable{
 	}
 //	Updating the game
 	public void update() {
-		player.KeyBindings();
-		player.update();
-//		Updating each laser
-		for (int i = 0; i <laserList.size(); i	++) {
-			tempLaser = laserList.get(i);	
-			tempLaser.update();
+		if (player.getHealth() != 0) {
+			player.KeyBindings();
+			player.update();
+	//		Updating each laser
+			
+			for (int i = 0; i <laserList.size(); i	++) {
+				tempLaser = laserList.get(i);	
+				tempLaser.update();
+			}
 		}
-	
 	}
 	
 //	All Graphics goes here
@@ -122,17 +128,17 @@ public class Game extends JComponent implements Runnable{
 		
 		g = bs.getDrawGraphics();
 		g.clearRect(0, 0, width, height);
-		player.render(g);
-		lvl.level1(g);
-		
-//		Drawing each laser
-		for (int i = 0; i < laserList.size(); i	++) {
-			tempLaser = laserList.get(i);	
-			tempLaser.render(g);
+		lvl.render(g);
+		if (player.health != 0) {
+			player.render(g);
+	//		Drawing each laser
+			for (int i = 0; i < laserList.size(); i	++) {
+				tempLaser = laserList.get(i);	
+				tempLaser.render(g);
+			}
 		}
 		bs.show();
 		g.dispose();
-		
 	}
 	
 	public void addTreasure(Treasure block) {
@@ -159,5 +165,4 @@ public class Game extends JComponent implements Runnable{
 	public void addLaserBlock(LaserBlock block) {
 		laserBlockList.add(block);
 	}
-
 }

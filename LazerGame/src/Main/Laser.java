@@ -5,8 +5,14 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.Timer;
+
+
 
 public class Laser extends GameItem {
 	int end = y+55;
@@ -28,12 +34,13 @@ public class Laser extends GameItem {
 
 	@Override
 	public void update() {
-
 		if (y == end) {
 			y = start;
 		}else {
 			y += 1;
 		}	
+
+		
 	}
 	
 	public void laserHitPlayer() {
@@ -52,6 +59,6 @@ public class Laser extends GameItem {
 	}
 	
 	public Rectangle getBounds() {
-		return new Rectangle(x,y,10,10);
+		return new Rectangle(x+12,y+10,5,25);
 	}
 }

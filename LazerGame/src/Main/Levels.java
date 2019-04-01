@@ -1,10 +1,12 @@
 package Main;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferStrategy;
 
-
+import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 
 
 public class Levels extends JComponent{
@@ -21,8 +23,6 @@ public class Levels extends JComponent{
 	*/
 	
 	// Variables
-	BufferStrategy bs;
-
 	int gameStarted = 1;
 	int width = 30, height = 30;
 	int x,y;
@@ -30,7 +30,7 @@ public class Levels extends JComponent{
 	int laserCount = 0;
 	int numberLaserBlock = 3;
 	
-	//Creating player and walls
+	//Creating objects
 	Game game;
 	Wall w = new Wall(x, y, width, height,game);
 	Treasure temptreasure;
@@ -41,12 +41,8 @@ public class Levels extends JComponent{
 		this.game = game;
 	}
 
-	public void render() {
-		
-	}
-	
-	public void update() {
-		
+	public void render(Graphics g) {
+		level1(g);
 	}
 	
 	public void level1(Graphics g) {
@@ -59,7 +55,7 @@ public class Levels extends JComponent{
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,3,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,1,1,1,1,1,1,5,1,1,1,1,1,5,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1},
+				{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,1},
 				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -120,7 +116,7 @@ public class Levels extends JComponent{
 					if (level1[i][j] == 5) {
 						if (laserCount < numberLaserBlock) {
 							game.addLaserBlock(new LaserBlock(j*25, i*25, width, height, game));
-							game.addLaser(new Laser(j*25, i*25, width, height, game));
+							game.addLaser(new Laser(j*25, i*25, 5, 25, game));
 							laserCount = laserCount + 1;
 						}
 
@@ -135,4 +131,3 @@ public class Levels extends JComponent{
 			}
 		}
 	}
-

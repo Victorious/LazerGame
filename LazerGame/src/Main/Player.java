@@ -1,5 +1,6 @@
 package Main;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -9,14 +10,15 @@ public class Player extends GameItem{
 	
 	int velX, velY;
 	int treasuresLevel1 = 0;
-	int health = 5;
+	int health;
 	int startPosY;
 	int startPosX;
 	
 	KeyManager keyManager = new KeyManager(); 
 	
-	public Player(int x, int y, int width, int height, Game game) {
+	public Player(int x, int y, int width, int height, Game game, int health) {
 		super(x, y, width, height, game);
+		this.health = health;
 	}
 	
 	public void KeyBindings() {
@@ -42,6 +44,7 @@ public class Player extends GameItem{
 //	Painting player
 	@Override
 	public void render(Graphics g) {
+		g.setColor(Color.black);
 		g.fillRect(x, y, width, height);		
 	}	
 	
@@ -50,6 +53,8 @@ public class Player extends GameItem{
 			System.out.println("Dead");
 			health = 5;
 			System.out.println("Health = " + health);
+		}
+		else {
 		}
 	}
 	
@@ -181,6 +186,14 @@ public class Player extends GameItem{
 
 	public void setStartPosX(int startPosX) {
 		this.startPosX = startPosX;
+	}
+
+	public int getHealth() {
+		return health;
+	}
+
+	public void setHealth(int health) {
+		this.health = health;
 	}
 	
 	
